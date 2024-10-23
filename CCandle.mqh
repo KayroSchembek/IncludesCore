@@ -14,7 +14,11 @@ class CCandle
         
         bool NewCandle(ENUM_TIMEFRAMES TimeFrame);
         
-        
+        int getMaxIndexCandle(ENUM_TIMEFRAMES timeframe, int numBar);
+        int getMinIndexCandle(ENUM_TIMEFRAMES timeframe, int numBar);
+        double getMaxPriceCandle(ENUM_TIMEFRAMES timeframe, int numBar);
+        double getMinPriceCandle(ENUM_TIMEFRAMES timeframe, int numBar);
+                
         double getAskPrice();
         double getBidPrice();
         
@@ -48,3 +52,27 @@ double CCandle::getBidPrice()
          return mqlTick.bid;
       return SymbolInfoDouble(_Symbol, SYMBOL_BID);   
    }
+   
+   
+int CCandle::getMaxIndexCandle(ENUM_TIMEFRAMES timeframe, int numBar)
+   {
+      return (iHighest(_Symbol, timeframe, MODE_HIGH, numBar, 1));
+   }
+
+double CCandle::getMaxPriceCandle(ENUM_TIMEFRAMES timeframe,int numBar)
+   {
+      int index = getMaxIndexCandle(timeframe, numBar);
+      return iHigh(_Symbol, timeframe, index);
+   }
+   
+int CCandle::getMinIndexCandle(ENUM_TIMEFRAMES timeframe, int numBar)
+   {
+      return (iLowest(_Symbol, timeframe, MODE_LOW, numBar, 1));
+   }
+
+double CCandle::getMinPriceCandle(ENUM_TIMEFRAMES timeframe,int numBar)
+   {
+      int index = getMinIndexCandle(timeframe, numBar);
+      return iLow(_Symbol, timeframe, index);
+   }   
+   
