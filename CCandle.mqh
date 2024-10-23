@@ -12,25 +12,26 @@ class CCandle
          CCandle(void)  { };
         ~CCandle(void)  { };
         
-        bool NewCandle(ENUM_TIMEFRAMES TimeFrame); // ou CCandle::NewCandle();
+        bool NewCandle(ENUM_TIMEFRAMES TimeFrame);
         
         
         double getAskPrice();
         double getBidPrice();
+        
+        
   };
-  
-  
+
 bool CCandle::NewCandle(ENUM_TIMEFRAMES TimeFrame)
    {
       static int indice = 0;
       int novo_indice = Bars(_Symbol, TimeFrame); 
-      if(indice != novo_indice)
-         {
-            indice = novo_indice;
-            return true;
+      if(indice != novo_indice)  
+         {  
+            indice = novo_indice;   
+            return true;  
          } 
       return false;   
-   }
+   }  
    
 double CCandle::getAskPrice()
    {
